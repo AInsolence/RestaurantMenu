@@ -11,8 +11,7 @@ Base = declarative_base()
 
 class Restaurant():
     '''Class for create objects which will representing restaurants'''
-    __tablename__ = 'restaurant' #table info#
-    
+    __tablename__ = 'restaurant' #table info
     '''Mapper'''
     name = Column(String(80), nullable = False)
     id = Column(Integer, primary_key = True)
@@ -20,8 +19,7 @@ class Restaurant():
     
 class MenuItem():
     '''Class for create objects which will representing restaurants'''
-    __tablename__ = 'menu_item' #table info#
-    
+    __tablename__ = 'menu_item' #table info
     '''Mapper'''
     name = Column(String(80), nullable = False)
     id = Column(Integer, primary_key = True)
@@ -31,5 +29,6 @@ class MenuItem():
     restaurant_id = Column(Integer, ForegnKey('restaurant.id'))
     restaurant = relationship(Restaurant)
     
+    print ('Hello!')    
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.create_all(engine)
