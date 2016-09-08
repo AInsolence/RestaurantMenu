@@ -23,3 +23,12 @@ session.add(cheesepizza)
 session.commit()
 #Check result
 session.query(MenuItem).all()
+
+#Add second menu item in our menu of Pizza Palace
+seafoodpizza = MenuItem(name = 'Seafood Pizza', course = 'Entree', description = 'Made with shrimps, salman and smokee anchovies.', prise = '11.50',restaurant = myFirstRestaurant)
+session.add(seafoodpizza)
+session.commit()
+#Check first object and get it name attribute
+firstResult = session.query(Restaurant).first()
+firstResult.name
+
