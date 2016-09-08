@@ -8,10 +8,10 @@ from database_setup import Base, Restaurant, MenuItem
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bind = engine
 DBsession = sessionmaker(bind = engine)
-session = DBsession
+session = DBsession()
 
 #Add first new Restaurant in our menu
-myFirstRestaurant = Restaurant(name = 'Pizza Palace')
+myFirstRestaurant = Restaurant(name = "Pizza Palace")
 session.add(myFirstRestaurant)
 session.commit()
 #Check result

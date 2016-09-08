@@ -5,7 +5,8 @@
 # Use sqlalchemy module to work with database. DOCUMENTATION ## http://docs.sqlalchemy.org/en/latest ##
 # master branch
 
-#imports#
+#imports
+import os
 import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
@@ -14,7 +15,7 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
-class Restaurant():
+class Restaurant(Base):
     '''Class for create objects which will representing restaurants'''
     __tablename__ = 'restaurant' #table info
     #mapper
@@ -22,7 +23,7 @@ class Restaurant():
     id = Column(Integer, primary_key = True)
     
     
-class MenuItem():
+class MenuItem(Base):
     '''Class for create objects which will representing restaurants'''
     __tablename__ = 'menu_item' #table info
     #mapper
