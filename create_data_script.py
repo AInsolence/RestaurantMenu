@@ -48,3 +48,10 @@ print UrbanVeggieBurger.price
 UrbanVeggieBurger.price = '$2.99'
 session.add(UrbanVeggieBurger) # add to session
 session.commit() # commit updated data
+
+'''Deleting from DB'''
+spinach = session.query(MenuItem).filter_by(name = 'Spinach Ice Cream').one()
+print spinach.restaurant.name
+session.delete(spinach)
+session.commit()
+
