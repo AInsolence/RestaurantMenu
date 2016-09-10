@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # database_setup.py -- Python module for Restaurant Menu project.
 # Module create, read, update and delete information on sqlite databases used for that web site.
-# Use sqlite module DOCUMENTATION ## https://www.sqlite.org/docs.html ##
-# Use sqlalchemy module to work with database. DOCUMENTATION ## http://docs.sqlalchemy.org/en/latest ##
+# Used sqlite module DOCUMENTATION ## https://www.sqlite.org/docs.html ##
+# Used sqlalchemy module to work with database. DOCUMENTATION ## http://docs.sqlalchemy.org/en/latest ##
 # master branch
 
 #imports
@@ -24,7 +24,7 @@ class Restaurant(Base):
     
     
 class MenuItem(Base):
-    '''Class for create objects which will representing restaurants'''
+    '''Class for create objects which will representing menu items'''
     __tablename__ = 'menu_item' #table info
     #mapper
     name = Column(String(80), nullable = False)
