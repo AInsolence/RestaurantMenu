@@ -16,7 +16,7 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 class Restaurant(Base):
-    '''Class for create objects which will representing restaurants'''
+    '''Class for create objects which will represent restaurants'''
     __tablename__ = 'restaurant' #table info
     #mapper
     name = Column(String(80), nullable = False)
@@ -24,7 +24,7 @@ class Restaurant(Base):
     
     
 class MenuItem(Base):
-    '''Class for create objects which will representing menu items'''
+    '''Class for create objects which will represent menu items'''
     __tablename__ = 'menu_item' #table info
     #mapper
     name = Column(String(80), nullable = False)
