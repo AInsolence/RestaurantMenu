@@ -1,5 +1,7 @@
 '''Python script changed data in our DB'''
 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #Import our databases
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker

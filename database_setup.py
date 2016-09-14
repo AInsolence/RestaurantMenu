@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # database_setup.py -- Python module for Restaurant Menu project.
 # Module create, read, update and delete information on sqlite databases used for that web site.
 # Used sqlite module DOCUMENTATION ## https://www.sqlite.org/docs.html ##
