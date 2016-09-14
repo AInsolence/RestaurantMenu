@@ -28,7 +28,7 @@ class webserverHandler(BaseHTTPRequestHandler):
 def main():
     try:
         port = 8080
-        server = HTTPServer(('',port), webserverHandler)
+        server = HTTPServer(('',port), webserverHandler)#we instantiate HTTPServer, pointing to him, what address and handler use to work with http-queries
         print "Web server running on port %s" % port
         server.serve_forever()
         
