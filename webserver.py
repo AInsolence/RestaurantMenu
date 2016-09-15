@@ -20,6 +20,7 @@ class webserverHandler(BaseHTTPRequestHandler):
                 output = ""
                 output += "<html><body>"
                 output += "Hello from server!!!"
+                output += "<form method = 'POST' enctype = 'multipart/form-data' action = '/hello'><h2>What would you like me to say?<h2><input name = 'message' type = 'text' ><input type = 'submit' value = 'Submit'></form>"
                 output += "</body></html>"
                 self.wfile.write(output)
                 print output
@@ -32,6 +33,7 @@ class webserverHandler(BaseHTTPRequestHandler):
                 output = ""
                 output += "<html><body>"
                 output += "&#161&#161&#161Hola-Hola!!!<a href = '/hello'>BAck to english!</a>"# '&#161' = upside-down exclamation point
+                output += "<form method = 'POST' enctype = 'multipart/form-data' action = '/hello'><h2>What would you like me to say?<h2><input name = 'message' type = 'text' ><input type = 'submit' value = 'Submit'></form>"
                 output += "</body></html>"
                 self.wfile.write(output)
                 print output
