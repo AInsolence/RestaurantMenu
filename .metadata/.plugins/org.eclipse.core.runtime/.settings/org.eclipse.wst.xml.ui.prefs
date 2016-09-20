@@ -1,0 +1,23 @@
+cdataBorder=\#E6DB74 | \#222222 | null | null | null | null
+cdataText=\#E6DB74 | \#222222 | null | null | null | null
+commentBorder=\#75715E | \#222222 | null | null | null | null
+commentText=\#75715E | \#222222 | null | null | null | null
+declBoder=\#A7EC21 | \#222222 | null | null | null | null
+declBorder=\#FFFFFF | \#222222 | null | null | null | null
+doctypeExternalId=\#C8CECC | \#222222 | null | null | null | null
+doctypeExternalPubref=\#C8CECC | \#222222 | null | null | null | null
+doctypeExtrenalSysref=\#C8CECC | \#222222 | null | null | null | null
+doctypeName=\#C8CECC | \#222222 | null | null | null | null
+eclipse.preferences.version=1
+entityReference=\#BE84FF | \#222222 | null | null | null | null
+org.eclipse.wst.sse.ui.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+piBorder=\#FFFFFF | \#222222 | null | null | null | null
+piContent=\#A6E22D | \#222222 | null | null | null | null
+tagAttributeEquals=\#FFFFFF | \#222222 | null | null | null | null
+tagAttributeName=\#A6E22D | \#222222 | null | null | null | null
+tagAttributeValue=\#E6DB74 | \#222222 | null | null | null | null
+tagBorder=\#FFFFFF | \#222222 | null | null | null | null
+tagName=\#F92772 | \#222222 | null | null | null | null
+xmlContent=\#FFFFFF | \#222222 | null | null | null | null
+xml_content_assist_default_page_sort_order=org.eclipse.wst.xml.ui.proposalCategory.xmlTags\u0000org.eclipse.wst.xml.ui.proposalCategory.xmlTemplates\u0000
+xml_content_assist_own_page_sort_order=org.eclipse.wst.xml.ui.proposalCategory.xmlTemplates\u0000org.eclipse.wst.xml.ui.proposalCategory.xmlTags\u0000

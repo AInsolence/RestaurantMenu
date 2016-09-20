@@ -6,7 +6,7 @@
 #This file created web server and HTTP request handler for it
 #http.server module docs: https://docs.python.org/3.4/library/http.server.html
 
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 import cgi
 
 '''Interaction with database'''
@@ -37,12 +37,10 @@ class webserverHandler(BaseHTTPRequestHandler):
                 output += "<html><body>"
                 for restaurant in restaurants:
                     output += "<h1> %s <h1>" % restaurant
+                    output += "<h2><a href = '1'>Edit</a><h2>"
+                    output += "<h2><a href = '2'>Delete</a><h2>"
                     output += "</br>"
-                    output += "<h2><a href = "/id/edit">Edit</a><h2>"
-                    output += "</br>"
-                    output += "<h2><a href = "/delete">Delete</a><h2>"
-                    output += "</br></br></br>"
-                output += "<h2><a href = "restaurants/new">Make a New Restaurant</a><h2>"
+                output += "<h2><a href = 'restaurants/new'>Make a New Restaurant</a><h2>"
                 output += "</br></br>"
                 output += "</body></html>"
                 self.wfile.write(output)
