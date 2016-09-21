@@ -101,8 +101,7 @@ class webserverHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         try:
             if self.path.endswith("/delete"):
-                ctype, pdict = cgi.parse_header(
-                    self.headers.getheader('content-type'))
+                ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
                 if ctype == 'multipart/form-data':
                     fields = cgi.parse_multipart(self.rfile, pdict)
                     messagecontent = fields.get('deleteRestaurant')
@@ -119,8 +118,7 @@ class webserverHandler(BaseHTTPRequestHandler):
                         print output
                         
             if self.path.endswith("/edit"):
-                ctype, pdict = cgi.parse_header(
-                    self.headers.getheader('content-type'))
+                ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
                 if ctype == 'multipart/form-data':
                     fields = cgi.parse_multipart(self.rfile, pdict)
                     messagecontent = fields.get('editRestaurantName')
@@ -138,8 +136,7 @@ class webserverHandler(BaseHTTPRequestHandler):
                         print output
                         
             if self.path.endswith("/restaurants/new"):
-                ctype, pdict = cgi.parse_header(
-                    self.headers.getheader('content-type'))
+                ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
                 if ctype == 'multipart/form-data':
                     fields = cgi.parse_multipart(self.rfile, pdict)
                     messagecontent = fields.get('newRestaurantName')
