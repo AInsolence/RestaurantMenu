@@ -32,6 +32,7 @@ class webserverHandler(BaseHTTPRequestHandler):
                     self.send_response(200)
                     self.send_header('Content-type', 'text/html')
                     self.end_headers()
+                    output = ""
                     output += "<html><body>"
                     output += "<h2>After deleting you'll not have ability to recover data. Are you sure you want to delete %s?<h2>" % restaurant_obj.name
                     output += "<form method = 'POST' enctype='multipart/form-data' action = '/restaurants/%s/delete'>" % restaurantIDPath
@@ -49,6 +50,7 @@ class webserverHandler(BaseHTTPRequestHandler):
                     self.send_response(200)
                     self.send_header('Content-type', 'text/html')
                     self.end_headers()
+                    output = ""
                     output += "<html><body>"
                     output += "<h2>Edit restaurant name<h2>"
                     output += "<form method = 'POST' enctype='multipart/form-data' action = '/restaurants/%s/edit'>" % restaurantIDPath
