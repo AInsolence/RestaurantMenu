@@ -35,7 +35,6 @@ class webserverHandler(BaseHTTPRequestHandler):
                     output += "<html><body>"
                     output += "<h2>After deleting you'll not have ability to recover data. Are you sure you want to delete %s?<h2>" % restaurant_obj.name
                     output += "<form method = 'POST' enctype='multipart/form-data' action = '/restaurants/%s/delete'>" % restaurantIDPath
-                    output += "<input name = 'deleteRestaurant' type = 'text' placeholder = '%s' > " % restaurant_obj.name
                     output += "<input type='submit' value='Delete'>"
                     output += "</br>"
                     output += "</form></body></html>"
