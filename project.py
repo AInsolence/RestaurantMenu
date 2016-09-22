@@ -23,7 +23,7 @@ session = DBsession()
 
 app = Flask(__name__)
 @app.route('/')
-@app.route('/hello')
+@app.route('/restaurants/<int:restaurant_id>/')
 
 def HelloWorld():
     restaurant = session.query(Restaurant).first()
