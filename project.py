@@ -7,7 +7,7 @@
 # master branch
 
 #import framework
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 
 '''Interaction with database'''
 from sqlalchemy import create_engine
@@ -38,6 +38,7 @@ def newMenuItem(restaurant_id):
 		newItem = MenuItem(name = request.form['name'], restaurant_id = restaurant_id)
 		session.add(newItem)
 		session.commit()
+		flash("New item successfully created!")
 		return redirect(url_for(restaurantMenu, restaurant_id = restaurant_id))
     else:
     	return render_template('newmenuitem.html', restaurant_id = restaurant_id)
@@ -46,25 +47,35 @@ def newMenuItem(restaurant_id):
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit/', methods = ['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
-	item = session.query(MenuItem).filter_by(id = menu_id).one()
+	itemToEdit = session.query(MenuItem).filter_by(id = menu_id).one()
 	if request.method == 'POST':
 		if request.form['newname']:
-			item.name = request.form['newname']
-			session.add(item)
+			itemToEdit.name = request.form['newname']
+			session.add(itemToEdit)
 			session.commit()
+			flash("Menu item has been successfully edited!")
 			return redirect(url_for(restaurantMenu, restaurant_id = restaurant_id))
     else:
-    	return render_template('editmenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = item)
+    	return render_template('editmenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToEdit)
 
 # Task 3: Create a route for deleteMenuItem function here
 
-@app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/delete/')
+@app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/delete/', methods = ['GET', 'POST'])
 def deleteMenuItem(restaurant_id, menu_id):
-    return "page to delete a menu item. Task 3 complete!"
+	itemToDelete = session.query(MenuItem).filter_by(id = menu_id).one()
+	if request.method == 'POST':
+		session.delete(itemToDelete)
+		session.commit()
+		flash("Menu item has been successfully deleted!")
+		return redirect(url_for(restaurantMenu, restaurant_id = restaurant_id))
+    else:
+    	return render_template('deletemenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToDelete)
 
 
 
-   
+
+
 if __name__ == '__main__':
+	app.secret_key = super_secret_key
     app.debug = True
     app.run(host = '0.0.0.0', port = 5000)
