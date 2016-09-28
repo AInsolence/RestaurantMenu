@@ -23,6 +23,22 @@ session = DBsession()
 
 app = Flask(__name__)
 
+#JSON request RESTful API
+
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON')
+def restaurantMenuJSON(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    itemsToJSON = session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all()
+    return jsonify(MenuItems=[i.serialize for i in itemsToJSON])
+
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON')
+def MenuItemJSON(restaurant_id, menu_id):
+    itemToJSON = session.query(MenuItem).filter_by(id = menu_id).one()
+    return jsonify(MenuItems=itemToJSON.serialize)
+
+'''WEB SITE'''
+
 @app.route('/')
 @app.route('/restaurants/<int:restaurant_id>/')
 def restaurantMenu(restaurant_id):
@@ -30,13 +46,8 @@ def restaurantMenu(restaurant_id):
     items = session.query(MenuItem).filter_by(restaurant_id = restaurant.id)
     return render_template('menu.html', restaurant = restaurant, items = items)
 
-@app.route('/restaurants/<int:restaurant_id>/menu/JSON')
-def restaurantMenuJSON(restaurant_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
-    items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all()
-    return jsonify(MenuItems=[i.serialize for i in items])
 
-# Task 1: Create route for newMenuItem function here
+# Create route for newMenuItem function
 
 @app.route('/restaurants/<int:restaurant_id>/new/', methods = ['GET', 'POST'])
 def newMenuItem(restaurant_id):
@@ -49,7 +60,7 @@ def newMenuItem(restaurant_id):
 	else:
 		return render_template('newmenuitem.html', restaurant_id=restaurant_id)
 
-# Task 2: Create route for editMenuItem function here
+# Create route for editMenuItem function
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit/', methods = ['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
@@ -70,7 +81,7 @@ def editMenuItem(restaurant_id, menu_id):
     else:
     	return render_template('editmenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToEdit)
 
-# Task 3: Create a route for deleteMenuItem function here
+# Create a route for deleteMenuItem function
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/delete/', methods = ['GET', 'POST'])
 def deleteMenuItem(restaurant_id, menu_id):
