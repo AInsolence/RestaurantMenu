@@ -21,6 +21,7 @@ class Restaurant(Base):
     __tablename__ = 'restaurant' #table info
     #mapper
     name = Column(String(80), nullable = False)
+    description = Column(String(250))
     id = Column(Integer, primary_key = True)
     # We added this serialize function to be able to send JSON objects in a
     # serializable format
@@ -30,8 +31,6 @@ class Restaurant(Base):
                 'name': self.name,
                 'description': self.description,
                 'id': self.id,
-                'price': self.price,
-                'course': self.course,
             }    
     
 class MenuItem(Base):
