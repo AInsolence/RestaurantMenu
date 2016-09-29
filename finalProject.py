@@ -53,7 +53,7 @@ def restaurants():
 @app.route('/restaurants/new/')
 def createNewRestaurant():
 	if request.method == 'POST':
-		newRestaurant = Restaurant(name = request.form['name'], description = request.form['description'])
+		newRestaurant = Restaurant(name = request.form['name'], description = request.form['description'], logo_url = request.form['logo_url'])
 		session.add(newRestaurant)
 		session.commit()
 		flash("New restaurant successfully created! Please add some items to menu!")
@@ -71,6 +71,8 @@ def editRestaurant(restaurant_id):
 			restaurantToEdit.name = request.form['name']
 		if request.form['description']:
 			restaurantToEdit.description = request.form['description']
+		if request.form['logo_url']:
+			restaurantToEdit.logo_url = request.form['logo_url']
 		session.add(restaurantToEdit)
 		session.commit()
 		flash("New item successfully edited!")

@@ -22,6 +22,7 @@ class Restaurant(Base):
     #mapper
     name = Column(String(80), nullable = False)
     description = Column(String(250))
+    logo_url = Column(String(250))
     id = Column(Integer, primary_key = True)
     # We added this serialize function to be able to send JSON objects in a
     # serializable format
