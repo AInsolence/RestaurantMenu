@@ -25,17 +25,21 @@
                 {% endwith %}
 
             <a href = '{{url_for('newMenuItem', restaurant_id = restaurant.id) }}'>Create New Item</a>
+            <br>
+            <br>
 
             {% for i in items %}
           
                 <div class="menu_item">
                     <div class="image"></div>
                     <div class="info">
-                        <div class="menu_item_name"><h1>{{i.name}}</h1></div>
+                        <div class="menu_item_name">{{i.name}}</div>
                         <div class="price"> {{i.price}} </div>
                         <div class="description"> {{i.description}} </div>
                         <div class="edit_button"><a href = '{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = i.id) }}'>Edit</a></div>
                         <div class="delete_button"><a href = '{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = i.id) }}'>Delete</a></div>
+                        <br>
+                        <br>
                     </div>
                 </div>
 
