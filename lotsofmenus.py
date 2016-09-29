@@ -22,7 +22,7 @@ session = DBSession()
 
 
 # Menu for UrbanBurger
-restaurant1 = Restaurant(name="Urban Burger")
+restaurant1 = Restaurant(name="Urban Burger", description = 'Very good restaurant with tasty food!', logo_url = "")
 
 session.add(restaurant1)
 session.commit()
@@ -84,7 +84,7 @@ session.commit()
 
 
 # Menu for Super Stir Fry
-restaurant2 = Restaurant(name="Super Stir Fry")
+restaurant2 = Restaurant(name="Super Stir Fry", description = 'Very good restaurant with tasty food!', logo_url = "")
 
 session.add(restaurant2)
 session.commit()
@@ -128,7 +128,7 @@ session.commit()
 
 
 # Menu for Panda Garden
-restaurant1 = Restaurant(name="Panda Garden")
+restaurant1 = Restaurant(name="Panda Garden", description = 'Very good restaurant with tasty food!', logo_url = "")
 
 session.add(restaurant1)
 session.commit()
@@ -166,7 +166,7 @@ session.commit()
 
 
 # Menu for Thyme for that
-restaurant1 = Restaurant(name="Thyme for That Vegetarian Cuisine ")
+restaurant1 = Restaurant(name="Thyme for That Vegetarian Cuisine ", description = 'Very good restaurant with tasty food!', logo_url = "")
 
 session.add(restaurant1)
 session.commit()
@@ -210,7 +210,7 @@ session.commit()
 
 
 # Menu for Tony's Bistro
-restaurant1 = Restaurant(name="Tony\'s Bistro ")
+restaurant1 = Restaurant(name="Tony\'s Bistro ", description = 'Very good restaurant with tasty food!', logo_url = "")
 
 session.add(restaurant1)
 session.commit()
@@ -248,7 +248,7 @@ session.commit()
 
 
 # Menu for Andala's
-restaurant1 = Restaurant(name="Andala\'s")
+restaurant1 = Restaurant(name="Andala\'s", description = 'Very good restaurant with tasty food!', logo_url = "")
 
 session.add(restaurant1)
 session.commit()
@@ -286,7 +286,7 @@ session.commit()
 
 
 # Menu for Auntie Ann's
-restaurant1 = Restaurant(name="Auntie Ann\'s Diner' ")
+restaurant1 = Restaurant(name="Auntie Ann\'s Diner' ", description = 'Very good restaurant with tasty food!', logo_url = "")
 
 session.add(restaurant1)
 session.commit()
@@ -336,7 +336,7 @@ session.commit()
 
 
 # Menu for Cocina Y Amor
-restaurant1 = Restaurant(name="Cocina Y Amor ")
+restaurant1 = Restaurant(name="Cocina Y Amor ", description = 'Very good restaurant with tasty food!', logo_url = "path_to_logo_here")
 
 session.add(restaurant1)
 session.commit()
@@ -355,7 +355,7 @@ session.add(menuItem2)
 session.commit()
 
 
-restaurant1 = Restaurant(name="State Bird Provisions")
+restaurant1 = Restaurant(name="State Bird Provisions", description = 'Very good restaurant with tasty food!', logo_url = "")
 session.add(restaurant1)
 session.commit()
 
