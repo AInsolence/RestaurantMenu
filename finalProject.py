@@ -48,10 +48,10 @@ def restaurants():
     restaurants = session.query(Restaurant).all()
     return render_template('restaurants.html', restaurants = restaurants)
 
-# Create route for createNewRestaurant function
+# Create route for newRestaurant function
 
 @app.route('/restaurants/new/')
-def createNewRestaurant():
+def newRestaurant():
 	if request.method == 'POST':
 		newRestaurant = Restaurant(name = request.form['name'], description = request.form['description'], logo_url = request.form['logo_url'])
 		session.add(newRestaurant)
@@ -76,9 +76,9 @@ def editRestaurant(restaurant_id):
 		session.add(restaurantToEdit)
 		session.commit()
 		flash("New item successfully edited!")
-		return redirect(url_for('restaurants'))
+		return redirect(url_for('restaurants', restaurants = restaurants))
 	else:
-		return render_template('editrestaurant.html', restaurant_id)
+		return render_template('editrestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToEdit)
 
 # Create route for deleteRestaurant function
 
@@ -89,9 +89,9 @@ def deleteRestaurant(restaurant_id):
 		session.delete(restaurantToDelete)
 		session.commit()
 		flash("New item successfully deleted!")
-		return redirect(url_for('restaurants'))
+		return redirect(url_for('restaurants', restaurants = restaurants))
 	else:
-		return render_template('deleterestaurant.html', restaurant_id)
+		return render_template('deleterestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToDelete)
 
 #Menu block
 # Main menu page
