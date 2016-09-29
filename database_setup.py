@@ -43,6 +43,7 @@ class MenuItem(Base):
     course = Column(String(250))
     description = Column(String(250))
     price = Column(String(8))
+    image_url = Column(String(150))
     restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
     restaurant = relationship(Restaurant)
     # We added this serialize function to be able to send JSON objects in a
@@ -55,6 +56,7 @@ class MenuItem(Base):
                 'id': self.id,
                 'price': self.price,
                 'course': self.course,
+                'image_url': self.image_url,
             }    
 
         
