@@ -42,6 +42,23 @@ input {
 	background-color: #DAD4C0;
 }
 
+.box_style {
+	border: 0px solid black;
+	margin: auto;
+	padding: 10px;
+	overflow: hidden;
+	border-radius: 10px;
+	box-shadow: 10px 10px 20px rgba(210,219,255,0.6);
+}
+
+.col-md-2 {
+	text-align: center;
+}
+
+.bottom_menu {
+	align-items: center;
+}
+
 .menu_item_name{
 	color: darkblue;
 	text-align: left;

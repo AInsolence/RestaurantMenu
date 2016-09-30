@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html>
-
+<html lang="en">
     <head>
         <title>Restaurants</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,30 +12,44 @@
 
     <body>
         <div class="container">
-                <h1>Restaurants</h1>
 
-                <!--FLASH MESSAGE-->
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
+            <!--Top line with menu buttons-->
 
-                        <ul class="message">
-                        {% for message in messages %}
-                          <li><strong>{{message}}</strong></li>
-                        {% endfor %}
-                        </ul>
-
-                    {% endif %}
-                {% endwith %}
-
-            <div class="create_restaurant_button">
-            <a href = '{{url_for('newRestaurant') }}'>Create new restaurant</a>
+            <div class="row bottom_menu box_style">
+                <div class="col-md-2"><button type="button" class="btn btn-default"><a href = '{{url_for('newRestaurant') }}'>Create new restaurant</a></button></div>
+                <div class="col-md-2"><button type="button" class="btn btn-info">Forum</button></div>
+                <div class="col-md-2"><button type="button" class="btn btn-success">Profile</button></div>
+                <div class="col-md-2"><button type="button" class="btn btn-warning">Sing Up</button></div>
+                <div class="col-md-2"><button type="button" class="btn btn-primary">Sing In</button></div>
+                <div class="col-md-2"><button type="button" class="btn btn-danger">Contacts</button></div>    
             </div>
 
+            <!--"Restaurant" Title and profile image-->
+
+            <div class="row box_style">
+                <div class="col-md-2"><img src="{{ url_for('static', filename = 'image/logo.jpg')}}" class="img-responsive"></div>
+                <div class="col-md-8 site_head box_style"><h1>Restaurants</h1><h4>choose the best for yourself!</h4></div>
+                <div class="col-md-2"><img src="{{ url_for('static', filename = 'image/profile.jpeg')}}" class="img-responsive"></div>
+                    <!--FLASH MESSAGE-->
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+
+                            <ul class="message">
+                            {% for message in messages %}
+                                <li><strong>{{message}}</strong></li>
+                            {% endfor %}
+                            </ul>
+
+                        {% endif %}
+                    {% endwith %}
+            </div>    
+
+            <!--Restaurant pattern view-->
+
             {% for i in restaurants %}
-          
-                <div class="restaurant">
-                    <div class="image"></div>
-                    <div class="info">
+            <div class="row box_style">
+                <div class="col-md-2">Here restaurant logo</div>
+                <div class="col-md-10">
                         <div class="restaurant_name"><h2> {{i.name}} <h2></div>
                         <div class="description"> {{i.description}} </div>
                         <div class="show_menu"><a href="{{url_for('restaurantMenu', restaurant_id = i.id)}}">See restaurant menu</a></div>
@@ -47,8 +60,8 @@
                         <div class="delete_button">
                         <a href = '{{url_for('deleteRestaurant', restaurant_id = i.id) }}'>Delete</a>
                         </div>
-                    </div>
                 </div>
+            </div>
 
             {% endfor %}
         </div>
