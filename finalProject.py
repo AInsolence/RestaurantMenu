@@ -50,7 +50,7 @@ def restaurants():
 
 # Create route for newRestaurant function
 
-@app.route('/restaurants/new/')
+@app.route('/restaurants/new/', methods = ['GET', 'POST'])
 def newRestaurant():
 	if request.method == 'POST':
 		newRestaurant = Restaurant(name = request.form['name'], description = request.form['description'], logo_url = request.form['logo_url'])
@@ -63,7 +63,7 @@ def newRestaurant():
 
 # Create route for editRestaurant function
 
-@app.route('/restaurants/<int:restaurant_id>/new')
+@app.route('/restaurants/<int:restaurant_id>/new', methods = ['GET', 'POST'])
 def editRestaurant(restaurant_id):
 	restaurantToEdit = session.query(Restaurant).filter_by(id = restaurant_id).one()
 	if request.method == 'POST':
@@ -82,7 +82,7 @@ def editRestaurant(restaurant_id):
 
 # Create route for deleteRestaurant function
 
-@app.route('/restaurants/<int:restaurant_id>/delete')
+@app.route('/restaurants/<int:restaurant_id>/delete', methods = ['GET', 'POST'])
 def deleteRestaurant(restaurant_id):
 	restaurantToDelete = session.query(Restaurant).filter_by(id = restaurant_id).one()
 	if request.method == 'POST':

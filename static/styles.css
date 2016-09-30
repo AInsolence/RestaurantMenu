@@ -32,20 +32,14 @@ p {
 	color: darkblue;
 	}
 
-a {
-	font-family: 'Indie Flower', cursive;
-	font-size: 25px;
-	color: darkgreen;
-	}
-
 input {
 	font-family: 'Indie Flower', cursive;
 	font-size: 20px;
 	color: darkred;
 	}
 
-.container {
-	background-color: #DAD4C0;
+.site_head {
+	background-color: #FFFF9A;
 }
 
 .box_style {
@@ -104,13 +98,4 @@ input {
 
 .bottom_menu {
 	align-items: center;
-}
-
-.box_style {
-	border: 0px solid black;
-	margin: auto;
-	padding: 10px;
-	overflow: hidden;
-	border-radius: 10px;
-	box-shadow: 10px 10px 20px rgba(210,219,255,0.6);
 }
