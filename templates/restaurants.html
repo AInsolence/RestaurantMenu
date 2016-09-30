@@ -33,13 +33,9 @@
                     <!--FLASH MESSAGE-->
                     {% with messages = get_flashed_messages() %}
                         {% if messages %}
-
-                            <ul class="message">
                             {% for message in messages %}
-                                <li><strong>{{message}}</strong></li>
+                                <div class="alert alert-success" role="alert">{{message}}</div>
                             {% endfor %}
-                            </ul>
-
                         {% endif %}
                     {% endwith %}
             </div>    
