@@ -5,7 +5,7 @@
 	}
 
 body {
-	background-color: #DDE1BE;
+	background-color: #FBFADF;
 }
 
 h1 {
@@ -18,6 +18,12 @@ h1 {
 h2 {
 	font-family: 'Indie Flower', cursive;
 	text-align: center;
+}
+
+h4 {
+	font-family: 'Indie Flower', cursive;
+	text-align: center;
+	background-color: #FFFF9A;
 }
 
 p {
