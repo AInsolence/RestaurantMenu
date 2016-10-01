@@ -55,6 +55,12 @@ input {
 	text-align: center;
 }
 
+.image-place {
+	text-align: center;
+	height: 100%;
+    line-height: 12em;
+}
+
 .bottom_menu {
 	align-items: center;
 }
