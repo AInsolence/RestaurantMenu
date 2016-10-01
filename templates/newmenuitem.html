@@ -12,23 +12,28 @@
 
     <body>
         <div class="container">
-		<h1> New Menu Item </h1>
+        	<div class="row bottom_menu box_style">
+				<h1> New Menu Item </h1>
+			</div>
 
-			<form action="{{url_for('newMenuItem', restaurant_id=restaurant_id ) }}" method = 'POST'>
+			<div class="row bottom_menu box_style">
+				<form action="{{url_for('newMenuItem', restaurant_id=restaurant_id ) }}" method = 'POST'>
 
-			<p>Name:</p>
-			<input type='text' size='30' name='name'>
-			<p>Description:</p>
-			<input type='text' size='30' name='description'>
-			<p>Price:</p>
-			<input type='text' size='30' name='price'>
-			<p>Course:</p>
-			<input type='text' size='30' name='course'>
-
-			<input type='submit' value='Create'>
-
-			</form>
-			<a href="{{url_for('restaurantMenu', restaurant_id = restaurant_id)}}">Cancel</a>
+					<p>Name:</p>
+					<input type='text' size='30' name='name'>
+					<p>Description:</p>
+					<input type='text' size='30' name='description'>
+					<p>Price:</p>
+					<input type='text' size='30' name='price'>
+					<p>Course:</p>
+					<input type='text' size='30' name='course'>
+			
+				<div class="row bottom_menu box_style">
+					<input type='submit' class="btn btn-success" value='Create'>
+					<a href="{{url_for('restaurantMenu', restaurant_id = restaurant_id)}}" class="btn btn-danger" role="button">Cancel</a>
+				</div>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

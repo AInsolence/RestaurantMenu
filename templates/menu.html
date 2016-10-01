@@ -14,6 +14,18 @@
     <body>
         <div class="container">
 
+            <!--"Restaurant" Title and profile image-->
+
+            <div class="row bottom_menu box_style">
+                <div class="col-md-2"></div>
+
+                <div class="col-md-8 site_head box_style">
+                    <h1>{{restaurant.name}}</h1>
+                </div>
+
+                <div class="col-md-2"></div>
+            </div>
+            
             <!--Top line with menu buttons-->
 
             <div class="row bottom_menu box_style">
@@ -22,22 +34,18 @@
                 <div class="col-md-2"><a href='{{url_for('restaurants', restaurants = restaurants) }}' class="btn btn-primary" role="button">Back to restaurants</a></div>
             </div>
 
-            <div class="row bottom_menu box_style">
-                <h1>{{restaurant.name}}</h1>
-            </div>
 
-                <!--FLASH MESSAGE-->
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
+            <!--FLASH MESSAGE-->
 
-                        <ul class="message">
-                        {% for message in messages %}
-                          <li><strong>{{message}}</strong></li>
-                        {% endfor %}
-                        </ul>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
 
-                    {% endif %}
-                {% endwith %}
+                    {% for message in messages %}
+                        <div class="alert alert-success" role="alert">{{message}}</div>
+                    {% endfor %}
+
+                {% endif %}
+            {% endwith %}    
 
             <!--Carousel with restaurant cousins image-->
             <div class="row box_style">
