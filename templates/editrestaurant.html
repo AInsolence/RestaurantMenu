@@ -12,27 +12,30 @@
 
     <body>
         <div class="container">
-        <h1> Edit Restaurant information: </h1>
-
-            <form action="{{url_for('editRestaurant', restaurant_id=restaurant_id)}}" method = 'POST'>
-
-            <p>Name:</p>
-
-            <input type='text' size='30' name='newname' placeholder='{{restaurant.name}}'>
+            <div class="row bottom_menu box_style">
+                <h1> Edit Restaurant information: </h1>
+                </div>
+            <div class="row bottom_menu box_style">
             
-            <p>Description:</p>
+                <form action="{{url_for('editRestaurant', restaurant_id=restaurant_id)}}" method = 'POST'>
 
-            <input type='text' size='100' name='description' placeholder='{{restaurant.description}}'>
+                <p>Name:</p>
 
-            <p>Logo URL:</p>
+                <input type='text' size='30' name='newname' placeholder='{{restaurant.name}}'>
+                
+                <p>Description:</p>
 
-            <input type='text' size='100' name='price' placeholder='{{restaurant.logo_url}}'>
+                <input type='text' size='100' name='description' placeholder='{{restaurant.description}}'>
 
-            <input type='submit' value='Edit'>
+                <p>Logo URL:</p>
 
-            </form>
+                <input type='text' size='100' name='logo_url' placeholder='{{restaurant.logo_url}}'>
 
-            <a href="{{url_for('restaurants')}}">Cancel</a>
+                    <div class="row bottom_menu box_style">
+                        <input type='submit' class="btn btn-success" value='Edit'>
+                        <a href="{{url_for('restaurants')}}" class="btn btn-danger" role="button">Cancel</a>
+                </form></div>
+            </div> 
         </div>
     </body>
 </html>

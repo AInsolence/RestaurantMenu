@@ -62,12 +62,12 @@ def newRestaurant():
 
 # Create route for editRestaurant function
 
-@app.route('/restaurants/<int:restaurant_id>/new', methods = ['GET', 'POST'])
+@app.route('/restaurants/<int:restaurant_id>/edit', methods = ['GET', 'POST'])
 def editRestaurant(restaurant_id):
 	restaurantToEdit = session.query(Restaurant).filter_by(id = restaurant_id).one()
 	if request.method == 'POST':
-		if request.form['name']:
-			restaurantToEdit.name = request.form['name']
+		if request.form['newname']:
+			restaurantToEdit.name = request.form['newname']
 		if request.form['description']:
 			restaurantToEdit.description = request.form['description']
 		if request.form['logo_url']:
