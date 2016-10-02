@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-    <head>
-        <title>Restaurants</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap.css')}}"/>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css')}}">
-        <link src="//normalize.css.googlecode.com/svn/trunk/normalize.css"/>
-        <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
-    </head>
-
-    <body>
-        <div class="container">
+{%extends "base.html"%}
+{% block content %}
             <div class="row bottom_menu box_style">
                 <h1> Edit Menu Item </h1>
             </div>
@@ -41,6 +29,4 @@
                     </div>
                 </form>
             </div>                
-        </div>
-    </body>
-</html>
+{% endblock %}
