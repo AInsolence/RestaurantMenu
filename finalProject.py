@@ -45,7 +45,7 @@ def MenuItemJSON(restaurant_id, menu_id):
 @app.route('/restaurants/')
 def restaurants():
     restaurants = session.query(Restaurant).all()
-    return render_template('restaurants.html', restaurants = restaurants)
+    return render_template('restaurants.html', restaurants = restaurants, title = 'Restaurants')
 
 # Create route for newRestaurant function
 
@@ -58,7 +58,7 @@ def newRestaurant():
 		flash("New restaurant successfully created! Please add some items to menu!")
 		return redirect(url_for('restaurants'))
 	else:
-		return render_template('newrestaurant.html')
+		return render_template('newrestaurant.html', title = 'New restaurant')
 
 # Create route for editRestaurant function
 
@@ -77,7 +77,7 @@ def editRestaurant(restaurant_id):
 		flash("New item successfully edited!")
 		return redirect(url_for('restaurants', restaurants = restaurants))
 	else:
-		return render_template('editrestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToEdit)
+		return render_template('editrestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToEdit, title = 'Edit restaurant')
 
 # Create route for deleteRestaurant function
 
@@ -90,7 +90,7 @@ def deleteRestaurant(restaurant_id):
 		flash("New item successfully deleted!")
 		return redirect(url_for('restaurants', restaurants = restaurants))
 	else:
-		return render_template('deleterestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToDelete)
+		return render_template('deleterestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToDelete, title = 'Delete restaurant')
 
 #Menu block
 # Main menu page
@@ -99,7 +99,7 @@ def deleteRestaurant(restaurant_id):
 def restaurantMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id = restaurant.id)
-    return render_template('menu.html', restaurant = restaurant, restaurant_id = restaurant_id, items = items)
+    return render_template('menu.html', restaurant = restaurant, restaurant_id = restaurant_id, items = items, title = restaurant.name)
 
 # Create route for newMenuItem function
 
@@ -112,7 +112,7 @@ def newMenuItem(restaurant_id):
         flash("New item successfully created!")
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
     else:
-        return render_template('newmenuitem.html', restaurant_id=restaurant_id)
+        return render_template('newmenuitem.html', restaurant_id=restaurant_id, title = 'New menu item')
 
 # Create route for editMenuItem function
 
@@ -133,7 +133,7 @@ def editMenuItem(restaurant_id, menu_id):
         flash("Menu item has been successfully edited!")
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
-        return render_template('editmenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToEdit)
+        return render_template('editmenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToEdit, title = 'Edit menu item')
 
 # Create a route for deleteMenuItem function
 
@@ -146,7 +146,7 @@ def deleteMenuItem(restaurant_id, menu_id):
         flash("Menu item has been successfully deleted!")
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
-        return render_template('deletemenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToDelete)
+        return render_template('deletemenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToDelete, title = 'Delete menu item')
 
 
 
