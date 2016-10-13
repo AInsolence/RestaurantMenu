@@ -6,8 +6,10 @@
 # Used sqlalchemy module to interact with database. DOCUMENTATION ## http://docs.sqlalchemy.org/en/latest ##
 # master branch
 
-#import framework
+#imports
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import session as login_session # to avoid confusion with DB session
+import random, string
 
 '''Interaction with database'''
 from sqlalchemy import create_engine
@@ -38,7 +40,11 @@ def MenuItemJSON(restaurant_id, menu_id):
 
 '''WEB SITE'''
 
-#Restaurant block
+# Login/Logout/Profile block
+
+
+
+# Restaurant block
 # Main page with list of all restaurants
 
 @app.route('/')
@@ -92,7 +98,7 @@ def deleteRestaurant(restaurant_id):
 	else:
 		return render_template('deleterestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToDelete, title = 'Delete restaurant')
 
-#Menu block
+# Menu block
 # Main menu page
 
 @app.route('/restaurants/<int:restaurant_id>/menu')
