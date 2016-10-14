@@ -41,7 +41,11 @@ def MenuItemJSON(restaurant_id, menu_id):
 '''WEB SITE'''
 
 # Login/Logout/Profile block
-
+@app.route('/login')
+def showLogin():
+    state = ''.join(random.choise(string.ascii_uppercase + string.digits) for x in range(32))
+    login_session['state'] = state
+    return render_template('login.html', title = 'LogIn')
 
 
 # Restaurant block
