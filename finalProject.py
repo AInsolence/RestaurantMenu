@@ -7,9 +7,17 @@
 # master branch
 
 #imports
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, make_response
 from flask import session as login_session # to avoid confusion with DB session
 import random, string
+import httplib2
+import json
+import requests
+
+# oAuth2 imports
+
+from oauth2client.client import flow_from_client_secrets
+from oauth2client.client import FlowExchangeError
 
 '''Interaction with database'''
 from sqlalchemy import create_engine
@@ -43,7 +51,7 @@ def MenuItemJSON(restaurant_id, menu_id):
 # Login/Logout/Profile block
 @app.route('/login')
 def showLogin():
-    state = ''.join(random.choise(string.ascii_uppercase + string.digits) for x in range(32))
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
     login_session['state'] = state
     return render_template('login.html', title = 'LogIn')
 
