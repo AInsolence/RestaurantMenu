@@ -48,13 +48,23 @@ def MenuItemJSON(restaurant_id, menu_id):
 
 '''WEB SITE'''
 
+
 # Login/Logout/Profile block
+
+CLIENT_ID = json.loads(open('clent_secrets.json', 'r').read())['web']['client_id']
+
 @app.route('/login')
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
     login_session['state'] = state
     return render_template('login.html', title = 'LogIn')
 
+@app.route('/gconnect', methods = ['POST'])
+def gconnect():
+    if request.args.get('state') != login_session('state'):
+        response = make_response(json.dumps('Invalid state parameter'), 401)
+        response.headers['Content type'] = 'application json'
+        return response
 
 # Restaurant block
 # Main page with list of all restaurants
