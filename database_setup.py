@@ -16,6 +16,15 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+class User(Base):
+    """docstring for User"""
+    __tablename__ = 'user' #table info
+    #mapper
+    id = Column(Integer, primary_key = True)
+    name = Column(String(80), nullable = False)
+    email = Column(String(80), nullable = False)
+    picture = Column(String(80))
+
 class Restaurant(Base):
     '''Class for create objects which will represent restaurants'''
     __tablename__ = 'restaurant' #table info
@@ -24,6 +33,8 @@ class Restaurant(Base):
     description = Column(String(250))
     logo_url = Column(String(100))
     id = Column(Integer, primary_key = True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
     # We added this serialize function to be able to send JSON objects in a
     # serializable format
     @property
@@ -46,6 +57,8 @@ class MenuItem(Base):
     image_url = Column(String(150))
     restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
     restaurant = relationship(Restaurant)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
     # We added this serialize function to be able to send JSON objects in a
     # serializable format
     @property
@@ -54,11 +67,11 @@ class MenuItem(Base):
                 'name': self.name,
                 'description': self.description,
                 'id': self.id,
-                'price': self.price,
-                'course': self.course,
+                'price' : self.price,
+                'course' : self.course,
                 'image_url': self.image_url,
             }    
-
-        
-engine = create_engine('sqlite:///restaurantmenu.db')
+    
+         
+engine = create_engine('sqlite:///restaurantmenuwithusers.db')
 Base.metadata.create_all(engine)

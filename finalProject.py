@@ -52,6 +52,7 @@ def MenuItemJSON(restaurant_id, menu_id):
 # Login/Logout/Profile block
 
 CLIENT_ID = json.loads(open('clent_secrets.json', 'r').read())['web']['client_id']
+APPLICATION_NAME = "Restaurant Menu Application"
 
 @app.route('/login')
 def showLogin():
@@ -135,10 +136,40 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius:\
+     150px;-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
+
+    user_id = getUserID(login_session['email'])
+    if not user_id:
+        user_id = createUser(login_session)
+    login_session['user_id'] = user_id
+
+# User Helper Functions
+
+
+def createUser(login_session):
+    newUser = User(name=login_session['username'], email=login_session[
+                   'email'], picture=login_session['picture'])
+    session.add(newUser)
+    session.commit()
+    user = session.query(User).filter_by(email=login_session['email']).one()
+    return user.id
+
+
+def getUserInfo(user_id):
+    user = session.query(User).filter_by(id=user_id).one()
+    return user
+
+
+def getUserID(email):
+    try:
+        user = session.query(User).filter_by(email=email).one()
+        return user.id
+    except:
+        return None
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
 
@@ -180,15 +211,21 @@ def gdisconnect():
 @app.route('/restaurants/')
 def restaurants():
     restaurants = session.query(Restaurant).all()
-    return render_template('restaurants.html', restaurants = restaurants, title = 'Restaurants')
+    if 'username' not in login_session:
+        return render_template('publicrestaurants.html', restaurants = restaurants, title = 'Restaurants')
+    else:
+        return render_template('restaurants.html', restaurants = restaurants, title = 'Restaurants')
 
 # Create route for newRestaurant function
 
 @app.route('/restaurants/new/', methods = ['GET', 'POST'])
 def newRestaurant():
+    if 'username' not in login_session:
+        redirect ('/login')
 	if request.method == 'POST':
-		newRestaurant = Restaurant(name = request.form['name'], description = request.form['description'], logo_url = request.form['logo_url'])
-		session.add(newRestaurant)
+        newRestaurant = Restaurant(name = request.form['name'], description = request.form['description'],\
+         logo_url = request.form['logo_url'],  user_id=login_session['user_id'])
+        session.add(newRestaurant)
 		session.commit()
 		flash("New restaurant successfully created! Please add some items to menu!")
 		return redirect(url_for('restaurants'))
@@ -212,20 +249,28 @@ def editRestaurant(restaurant_id):
 		flash("New item successfully edited!")
 		return redirect(url_for('restaurants', restaurants = restaurants))
 	else:
-		return render_template('editrestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToEdit, title = 'Edit restaurant')
+		return render_template('editrestaurant.html', restaurant_id=restaurant_id,\
+         restaurant = restaurantToEdit, title = 'Edit restaurant')
 
 # Create route for deleteRestaurant function
 
 @app.route('/restaurants/<int:restaurant_id>/delete', methods = ['GET', 'POST'])
 def deleteRestaurant(restaurant_id):
 	restaurantToDelete = session.query(Restaurant).filter_by(id = restaurant_id).one()
-	if request.method == 'POST':
+	if 'username' not in login_session:
+        return redirect('/login')
+    if restaurantToDelete.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized to delete this\
+         restaurant. Please create your own restaurant in order to delete.');}\
+         </script><body onload='myFunction'>"
+    if request.method == 'POST':
 		session.delete(restaurantToDelete)
 		session.commit()
 		flash("New item successfully deleted!")
 		return redirect(url_for('restaurants', restaurants = restaurants))
 	else:
-		return render_template('deleterestaurant.html', restaurant_id=restaurant_id, restaurant = restaurantToDelete, title = 'Delete restaurant')
+		return render_template('deleterestaurant.html', restaurant_id=restaurant_id,\
+         restaurant = restaurantToDelete, title = 'Delete restaurant')
 
 # Menu block
 # Main menu page
@@ -234,14 +279,24 @@ def deleteRestaurant(restaurant_id):
 def restaurantMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id = restaurant.id)
-    return render_template('menu.html', restaurant = restaurant, restaurant_id = restaurant_id, items = items, title = restaurant.name)
+    creator = getUserInfo(restaurant.user_id)
+    if 'username' not in login_session or creator.id != login_session['user_id']:
+        return render_template('publicmenu.html', restaurant = restaurant, restaurant_id = restaurant_id,\
+        items = items, title = restaurant.name, creator = creator)
+    else:
+        return render_template('menu.html', restaurant = restaurant, restaurant_id = restaurant_id,\
+        items = items, title = restaurant.name, creator = creator)
 
 # Create route for newMenuItem function
 
 @app.route('/restaurants/<int:restaurant_id>/menu/new/', methods = ['GET', 'POST'])
 def newMenuItem(restaurant_id):
+    if 'username' not in login_session:
+        return redirect('/login')
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     if request.method == 'POST':
-        newItem = MenuItem(name=request.form['name'], description=request.form['description'], price=request.form['price'], course=request.form['course'], restaurant_id=restaurant_id)
+        newItem = MenuItem(name=request.form['name'], description=request.form['description'],\
+         price=request.form['price'], course=request.form['course'], restaurant_id=restaurant_id)
         session.add(newItem)
         session.commit()
         flash("New item successfully created!")
@@ -253,6 +308,9 @@ def newMenuItem(restaurant_id):
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/', methods = ['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
+    if 'username' not in login_session:
+        return redirect('/login')
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     itemToEdit = session.query(MenuItem).filter_by(id = menu_id).one()
     if request.method == 'POST':
         if request.form['newname']:
@@ -268,20 +326,25 @@ def editMenuItem(restaurant_id, menu_id):
         flash("Menu item has been successfully edited!")
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
-        return render_template('editmenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToEdit, title = 'Edit menu item')
+        return render_template('editmenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id,\
+         item = itemToEdit, title = 'Edit menu item')
 
 # Create a route for deleteMenuItem function
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/', methods = ['GET', 'POST'])
 def deleteMenuItem(restaurant_id, menu_id):
     itemToDelete = session.query(MenuItem).filter_by(id = menu_id).one()
+    if 'username' not in login_session:
+        return redirect('/login')
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
         flash("Menu item has been successfully deleted!")
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
-        return render_template('deletemenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, item = itemToDelete, title = 'Delete menu item')
+        return render_template('deletemenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id,\
+         item = itemToDelete, title = 'Delete menu item')
 
 
 
