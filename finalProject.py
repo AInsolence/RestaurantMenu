@@ -146,7 +146,7 @@ def gconnect():
         user_id = createUser(login_session)
     login_session['user_id'] = user_id
 
-# User Helper Functions
+# User Login Helper Functions
 
 
 def createUser(login_session):
