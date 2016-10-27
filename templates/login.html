@@ -13,7 +13,7 @@
         <div id="signInButton">
           <span class="g-signin"
             data-scope="openid email"
-            data-clientid="YOUR_CLIENT_ID_GOES_HERE.apps.googleusercontent.com"
+            data-clientid="133326887308-h6u4d19id8sg2ng1ap9fsq8j98i5vsbg.apps.googleusercontent.com"
             data-redirecturi="postmessage"
             data-accesstype="offline"
             data-cookiepolicy="single_host_origin"
@@ -33,7 +33,7 @@
                     // send the one-time-use code to server
                     $.ajax({
                         type : "POST",
-                        url : '/gconnect&state={{STATE}}',
+                        url : '/gconnect?state={{STATE}}',
                         processData : false,
                         data : authResult['code'],
                         contentType : 'application/octet-stream; charset=utf-8',
@@ -92,7 +92,7 @@
         if (result) {
           $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
          setTimeout(function() {
-          window.location.href = "/restaurant";
+          window.location.href = "/restaurants";
          }, 4000);
           
       } else {

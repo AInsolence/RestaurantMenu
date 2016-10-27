@@ -22,7 +22,7 @@ from oauth2client.client import FlowExchangeError
 '''Interaction with database'''
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Restaurant, MenuItem
+from database_setup import Base, Restaurant, MenuItem, User
 #Create engine and session
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bind = engine
@@ -51,13 +51,13 @@ def MenuItemJSON(restaurant_id, menu_id):
 
 # Login/Logout/Profile block
 CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
-APPLICATION_NAME = "Restaurant Menu Application"
+APPLICATION_NAME = "Restaurants"
 
 @app.route('/login')
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
     login_session['state'] = state
-    return render_template('login.html', title = 'LogIn')
+    return render_template('login.html', title = 'LogIn', STATE = state)
 
 #FACEBOOK
 @app.route('/fbconnect', methods=['POST'])
@@ -134,7 +134,7 @@ def fbdisconnect():
 @app.route('/gconnect', methods = ['POST'])
 def gconnect():
     # Validate state token
-    if request.args.get('state') != login_session('state'):
+    if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter'), 401)
         response.headers['Content type'] = 'application json'
         return response
@@ -143,7 +143,7 @@ def gconnect():
 
     try:
     # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope = '')
+        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -187,7 +187,7 @@ def gconnect():
         return response
 
     # Store the access token in the session for later use.
-    login_session['credentials'] = credentials
+    login_session['access_token'] = credentials.access_token
     login_session['gplus_id'] = gplus_id
 
     # Get user info
