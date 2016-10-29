@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Upload new Image</title>
+<h1>Upload new Image</h1>
+<form action="" method="post" enctype="multipart/form-data">
+  <p><input type="file" name="file">
+     <input type="submit" value="Upload">
+</form>
+{% if upload_result %}
+  <h3>Restaurant image:</h3>
+  <div><a href="{{image_url}}">{{image_url}}</a></div>
+  <img src="{{ image_url }}"/>
+  <h3>Original:</h3>
+  <img src="{{ upload_result['url'] }}"/>
+{% endif %}

@@ -14,8 +14,17 @@ import httplib2
 import json
 import requests
 
-# oAuth2 imports
+#Cloudinary API imports
+import cloudinary
+import cloudinary.uploader
+from cloudinary.uploader import upload
+import cloudinary.api
+from cloudinary.utils import cloudinary_url
 
+cloudinary.config(cloud_name = "ainsolence", api_key = "159571359742159", api_secret = "5wy_yKpD7DugGLc16lESXiLQS8E")
+
+
+# oAuth2 imports
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 
@@ -33,6 +42,16 @@ session = DBsession()
 
 app = Flask(__name__)
 
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    upload_result = None
+    image_url = None
+    if request.method == 'POST':
+        file = request.files['file']
+        if file:
+            upload_result = upload(file, use_filename = 'true', folder = "Restaurant")
+            image_url, options = cloudinary_url(upload_result['public_id'], format = "jpg")
+    return render_template('upload_form.html', upload_result = upload_result, image_url = image_url)
 #JSON request RESTful API
 
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON')
