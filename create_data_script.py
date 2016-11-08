@@ -3,10 +3,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #Import our databases
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
+
 #Create engine and session
+
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bind = engine
 DBsession = sessionmaker(bind = engine)
